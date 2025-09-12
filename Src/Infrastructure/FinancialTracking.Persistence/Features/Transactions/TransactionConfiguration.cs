@@ -55,7 +55,7 @@ namespace FinancialTracking.Persistence.Features.Transactions
                    .WithMany()
                    .HasForeignKey(t => t.UserId)
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.ClientCascade);
 
             
         }

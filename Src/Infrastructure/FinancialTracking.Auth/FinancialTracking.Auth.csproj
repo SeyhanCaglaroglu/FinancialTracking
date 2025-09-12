@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\..\Core\FinancialTracking.Application\FinancialTracking.Application.csproj" />
+    <ProjectReference Include="..\..\Core\FinancialTracking.Domain\FinancialTracking.Domain.csproj" />
   </ItemGroup>
 
 </Project>

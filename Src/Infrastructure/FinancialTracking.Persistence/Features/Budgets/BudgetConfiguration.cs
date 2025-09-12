@@ -37,10 +37,9 @@ namespace FinancialTracking.Persistence.Features.Budgets
                    .WithOne(u => u.Budget!)
                    .HasForeignKey<Budget>(b => b.UserId)
                    .IsRequired()
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.ClientCascade);
 
-            builder.HasIndex(b => b.UserId)
-                   .IsUnique();
+            
         }
     }
 }

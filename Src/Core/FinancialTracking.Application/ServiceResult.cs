@@ -27,6 +27,15 @@ namespace FinancialTracking.Application
                 Status = status
             };
         }
+        public static ServiceResult<T> Success(HttpStatusCode status = HttpStatusCode.OK)
+        {
+            return new ServiceResult<T>()
+            {
+                Data = default,
+                Status = status
+            };
+        }
+
 
         public static ServiceResult<T> SuccessAsCreated(T data, string urlAsCreated)
         {
