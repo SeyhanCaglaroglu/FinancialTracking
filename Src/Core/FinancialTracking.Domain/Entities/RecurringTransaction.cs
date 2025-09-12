@@ -1,0 +1,27 @@
+﻿using FinancialTracking.Domain.Entities.Common;
+using FinancialTracking.Domain.Enums;
+using FinancialTracking.Domain.ValueObjects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FinancialTracking.Domain.Entities
+{
+    public class RecurringTransaction: BaseEntity<int>,IAuditEntity
+    {
+        public Money Amount { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public TransactionType Type { get; set; }
+        public DateTime NextExecutionDate { get; set; }
+        public int DayRepeatInterval { get; set; }
+
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+        public DateTime Created { get; set; }
+        public DateTime? Updated { get; set; }
+
+    }
+}
