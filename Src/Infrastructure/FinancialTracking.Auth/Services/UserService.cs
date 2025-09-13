@@ -31,15 +31,15 @@ namespace FinancialTracking.Auth.Services
                 return ServiceResult<UserDto>.Fail(errors, HttpStatusCode.BadRequest);
             }
 
-            return ServiceResult<UserDto>.Success(_mapper.Map<UserDto>(user), HttpStatusCode.OK);
+            return ServiceResult<UserDto>.Success(_mapper.Map<UserDto>(user), HttpStatusCode.Created);
         }
 
-        public async Task<ServiceResult<NoContent>> CreateUserRoleAsync(CreateUserRoleDto createUserRoleDto)
+        public async Task<ServiceResult<NoDataDto>> CreateUserRoleAsync(CreateUserRoleDto createUserRoleDto)
         {
             // Kullanıcıyı bul
             var user = await _userManager.FindByEmailAsync(createUserRoleDto.Email);
             if (user == null)
-                return ServiceResult<NoContent>.Fail("Email Not Found", HttpStatusCode.NotFound);
+                return ServiceResult<NoDataDto>.Fail("Email Not Found", HttpStatusCode.NotFound);
 
             // Rol yoksa oluştur
             if (!await _roleManager.RoleExistsAsync(createUserRoleDto.Role))
@@ -48,7 +48,7 @@ namespace FinancialTracking.Auth.Services
             // Kullanıcıya rol ata
             await _userManager.AddToRoleAsync(user, createUserRoleDto.Role);
 
-            return ServiceResult<NoContent>.Success(HttpStatusCode.Created);
+            return ServiceResult<NoDataDto>.Success(HttpStatusCode.Created);
         }
 
 

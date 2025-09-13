@@ -12,6 +12,6 @@ namespace FinancialTracking.Application.Contracts.Auth
     {
         Task<ServiceResult<UserDto>> CreateUserAsync(CreateUserDto createUserDto);
         Task<ServiceResult<UserDto>> GetUserByUserNameAsync(string userName);
-        Task<ServiceResult<NoContent>> CreateUserRoleAsync(CreateUserRoleDto createUserRoleDto);
+        Task<ServiceResult<NoDataDto>> CreateUserRoleAsync(CreateUserRoleDto createUserRoleDto);
     }
 }

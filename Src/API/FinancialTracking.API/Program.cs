@@ -3,15 +3,10 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithValidation();
+builder.Services.AddControllersWithValidation().AddAppServices(builder.Configuration).AddCustomIdentity().AddVersioningExt();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
-builder.Services.AddAppServices(builder.Configuration);
-
-//Identity
-builder.Services.AddCustomIdentity();
 
 var app = builder.Build();
 

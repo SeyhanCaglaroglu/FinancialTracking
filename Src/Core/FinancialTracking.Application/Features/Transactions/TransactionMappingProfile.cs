@@ -2,6 +2,7 @@
 using FinancialTracking.Application.Features.Transactions.CommonDto;
 using FinancialTracking.Application.Features.Transactions.Create;
 using FinancialTracking.Application.Features.Transactions.Update;
+using FinancialTracking.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace FinancialTracking.Application.Features.Transactions
     {
         public TransactionMappingProfile()
         {
-            CreateMap<Domain.Entities.Transaction, TransactionDto>().ReverseMap();
+            CreateMap<Transaction, TransactionDto>().ReverseMap();
 
-            CreateMap<CreateTransactionRequest, Domain.Entities.Transaction>().ReverseMap();
+            CreateMap<CreateTransactionRequest, Transaction>().ReverseMap();
 
-            CreateMap<UpdateTransactionRequest, Domain.Entities.Transaction>().ReverseMap();
+            CreateMap<UpdateTransactionRequest, Transaction>().ReverseMap();
         }
     }
 }
