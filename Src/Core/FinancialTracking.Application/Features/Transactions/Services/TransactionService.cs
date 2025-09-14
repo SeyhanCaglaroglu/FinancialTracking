@@ -28,9 +28,9 @@ namespace FinancialTracking.Application.Features.Transactions.Services
 
         public async Task<ServiceResult> DeleteAsync(int id, string userId)
         {
-            var product = await _transactionRepository.GetByIdAsync(id, userId);
+            var transaction = await _transactionRepository.GetByIdAsync(id, userId);
 
-            _transactionRepository.Delete(product!);
+            _transactionRepository.Delete(transaction!);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -41,10 +41,13 @@ namespace FinancialTracking.Application.Features.Transactions.Services
         {
             var transactions = await _transactionRepository.GetAllAsync(userId);
 
-            var transactionAsDto = _mapper.Map<List<TransactionDto>>(transactions);
+            var transactionAsDto = transactions != null
+                ? _mapper.Map<List<TransactionDto>>(transactions)
+                : new List<TransactionDto>(); // boş liste
 
-            return ServiceResult<List<TransactionDto>>.Success(transactionAsDto);
+            return ServiceResult<List<TransactionDto>>.Success(transactionAsDto, HttpStatusCode.OK);
         }
+
 
         public async Task<ServiceResult<TransactionDto>> GetByIdAsync(int id, string userId)
         {
@@ -57,7 +60,7 @@ namespace FinancialTracking.Application.Features.Transactions.Services
 
             var tansactionAsDto = _mapper.Map<TransactionDto>(transaction);
 
-            return ServiceResult<TransactionDto>.Success(tansactionAsDto);
+            return ServiceResult<TransactionDto>.Success(tansactionAsDto, HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<List<TransactionDto>>> GetTransactionsByCategoryAsync(int categoryId, string userId)
@@ -66,7 +69,7 @@ namespace FinancialTracking.Application.Features.Transactions.Services
 
             var transactionAsDto = _mapper.Map<List<TransactionDto>>(transactions);
 
-            return ServiceResult<List<TransactionDto>>.Success(transactionAsDto);
+            return ServiceResult<List<TransactionDto>>.Success(transactionAsDto, HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<List<TransactionDto>>> GetTransactionsByTypeAsync(TransactionType transactionType, string userId)
@@ -75,14 +78,13 @@ namespace FinancialTracking.Application.Features.Transactions.Services
 
             var transactionAsDto = _mapper.Map<List<TransactionDto>>(transactions);
 
-            return ServiceResult<List<TransactionDto>>.Success(transactionAsDto);
+            return ServiceResult<List<TransactionDto>>.Success(transactionAsDto, HttpStatusCode.OK);
         }
 
-        public async Task<ServiceResult> UpdateAsync(int id, UpdateTransactionRequest request, string userId)
+        public async Task<ServiceResult> UpdateAsync(int id, UpdateTransactionRequest request)
         {
             var transaction = _mapper.Map<Transaction>(request);
             transaction.Id = id;
-            transaction.UserId = userId;
 
             _transactionRepository.Update(transaction);
             await _unitOfWork.SaveChangesAsync();

@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Budgets.Create
 {
-    public record CreateBudgetRequest(Money TotalAmount);
+    public record CreateBudgetRequest(Money TotalAmount,string userId);
 }

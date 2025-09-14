@@ -20,7 +20,7 @@ namespace FinancialTracking.Application.Features.Budgets.Services
 {
     public class BudgetService(IBudgetRepository _BudgetRepository, IUnitOfWork _unitOfWork, IMapper _mapper) : IBudgetService
     {
-        public async Task<ServiceResult<CreateBudgetResponse>> CreateAsync(CreateBudgetRequest request, string userId)
+        public async Task<ServiceResult<CreateBudgetResponse>> CreateAsync(CreateBudgetRequest request)
         {
             var budget = _mapper.Map<Budget>(request);
 
@@ -48,7 +48,7 @@ namespace FinancialTracking.Application.Features.Budgets.Services
 
             var BudgetAsDto = _mapper.Map<List<BudgetDto>>(budgets);
 
-            return ServiceResult<List<BudgetDto>>.Success(BudgetAsDto);
+            return ServiceResult<List<BudgetDto>>.Success(BudgetAsDto,HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<BudgetDto>> GetByIdAsync(int id, string userId)
@@ -62,16 +62,15 @@ namespace FinancialTracking.Application.Features.Budgets.Services
 
             var BudgetAsDto = _mapper.Map<BudgetDto>(budget);
 
-            return ServiceResult<BudgetDto>.Success(BudgetAsDto);
+            return ServiceResult<BudgetDto>.Success(BudgetAsDto,HttpStatusCode.OK);
         }
 
         
 
-        public async Task<ServiceResult> UpdateAsync(int id, UpdateBudgetRequest request, string userId)
+        public async Task<ServiceResult> UpdateAsync(int id, UpdateBudgetRequest request)
         {
             var budget = _mapper.Map<Budget>(request);
             budget.Id = id;
-            budget.UserId = userId;
 
             _BudgetRepository.Update(budget);
             await _unitOfWork.SaveChangesAsync();

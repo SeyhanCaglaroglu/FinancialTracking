@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Transactions.Create
 {
-    public record CreateTransactionRequest(Money Amount, string Description, TransactionType Type, int? CategoryId);
+    public record CreateTransactionRequest(Money Amount, string Description, TransactionType Type, int? CategoryId,string userId);
 }

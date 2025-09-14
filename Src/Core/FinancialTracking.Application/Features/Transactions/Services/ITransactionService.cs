@@ -15,7 +15,7 @@ namespace FinancialTracking.Application.Features.Transactions.Services
         Task<ServiceResult<List<TransactionDto>>> GetAllListAsync(string userId);
         Task<ServiceResult<TransactionDto>> GetByIdAsync(int id, string userId);
         Task<ServiceResult<CreateTransactionResponse>> CreateAsync(CreateTransactionRequest request);
-        Task<ServiceResult> UpdateAsync(int id, UpdateTransactionRequest request,string userId);
+        Task<ServiceResult> UpdateAsync(int id, UpdateTransactionRequest request);
         Task<ServiceResult> DeleteAsync(int id,string userId);
         Task<ServiceResult<List<TransactionDto>>> GetTransactionsByTypeAsync(TransactionType transactionType, string userId);
         Task<ServiceResult<List<TransactionDto>>> GetTransactionsByCategoryAsync(int categoryId, string userId);

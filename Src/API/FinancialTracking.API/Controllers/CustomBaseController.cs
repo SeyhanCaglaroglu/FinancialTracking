@@ -5,7 +5,6 @@ using System.Net;
 
 namespace FinancialTracking.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class CustomBaseController : ControllerBase
     {

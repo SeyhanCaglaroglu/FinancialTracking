@@ -9,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Categories.CommonDto
 {
-    public record CategoryDto(int Id,string Name, DateTime Created, DateTime Updated, string UserId, ICollection<TransactionDto> Transactions, ICollection<RecurringTransactionDto> RecurringTransactions);
+    public record CategoryDto(int Id,string Name, DateTime Created, DateTime Updated, ICollection<TransactionDto> Transactions, ICollection<RecurringTransactionDto> RecurringTransactions);
 }

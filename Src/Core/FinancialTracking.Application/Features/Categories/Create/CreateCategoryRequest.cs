@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Categories.Create
 {
-    public record CreateCategoryRequest(string Name);
+    public record CreateCategoryRequest(string Name,string userId);
 }

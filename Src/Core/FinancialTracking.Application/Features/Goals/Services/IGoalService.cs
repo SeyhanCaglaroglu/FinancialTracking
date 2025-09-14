@@ -16,8 +16,8 @@ namespace FinancialTracking.Application.Features.Goals.Services
     {
         Task<ServiceResult<List<GoalDto>>> GetAllListAsync(string userId);
         Task<ServiceResult<GoalDto>> GetByIdAsync(int id, string userId);
-        Task<ServiceResult<CreateGoalResponse>> CreateAsync(CreateGoalRequest request, string userId);
-        Task<ServiceResult> UpdateAsync(int id, UpdateGoalRequest request, string userId);
+        Task<ServiceResult<CreateGoalResponse>> CreateAsync(CreateGoalRequest request);
+        Task<ServiceResult> UpdateAsync(int id, UpdateGoalRequest request);
         Task<ServiceResult> DeleteAsync(int id, string userId);
         Task<ServiceResult<GoalDto>> GetGoalByTitleAsync(string title, string userId);
     }

@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.RecurringTransactions.Update
 {
-    public record UpdateRecurringTransactionRequest(Money Amount, string Description, TransactionType Type, DateTime NextExecutionDate, int DayRepeatInterval, int? CategoryId);
+    public record UpdateRecurringTransactionRequest(Money Amount, string Description, TransactionType Type, DateTime NextExecutionDate, int DayRepeatInterval, int? CategoryId, string userId);
 }

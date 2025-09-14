@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Categories.Update
 {
-    public record UpdateCategoryRequest(string Name);
+    public record UpdateCategoryRequest(string Name, string userId);
 
 }

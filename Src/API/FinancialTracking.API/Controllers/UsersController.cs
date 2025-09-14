@@ -2,6 +2,7 @@
 using FinancialTracking.Application;
 using FinancialTracking.Application.Contracts.Auth;
 using FinancialTracking.Application.Features.Users.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,8 +12,10 @@ namespace FinancialTracking.API.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Tags("Users")]
+    [Authorize]
     public class UsersController(IUserService _userService) : CustomBaseController
     {
+        [AllowAnonymous]
         [MapToApiVersion("1")]
         [HttpPost("CreateUser", Name = "CreateUser")]
         [Consumes("application/json")]

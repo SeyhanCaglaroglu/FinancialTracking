@@ -16,8 +16,8 @@ namespace FinancialTracking.Application.Features.Budgets.Services
     {
         Task<ServiceResult<List<BudgetDto>>> GetAllListAsync(string userId);
         Task<ServiceResult<BudgetDto>> GetByIdAsync(int id, string userId);
-        Task<ServiceResult<CreateBudgetResponse>> CreateAsync(CreateBudgetRequest request, string userId);
-        Task<ServiceResult> UpdateAsync(int id, UpdateBudgetRequest request, string userId);
+        Task<ServiceResult<CreateBudgetResponse>> CreateAsync(CreateBudgetRequest request);
+        Task<ServiceResult> UpdateAsync(int id, UpdateBudgetRequest request);
         Task<ServiceResult> DeleteAsync(int id, string userId);
     }
 }

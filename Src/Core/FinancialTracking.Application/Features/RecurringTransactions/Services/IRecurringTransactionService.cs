@@ -17,8 +17,8 @@ namespace FinancialTracking.Application.Features.RecurringTransactions.Services
     {
         Task<ServiceResult<List<RecurringTransactionDto>>> GetAllListAsync(string userId);
         Task<ServiceResult<RecurringTransactionDto>> GetByIdAsync(int id, string userId);
-        Task<ServiceResult<CreateRecurringTransactionResponse>> CreateAsync(CreateRecurringTransactionRequest request, string userId);
-        Task<ServiceResult> UpdateAsync(int id, UpdateRecurringTransactionRequest request, string userId);
+        Task<ServiceResult<CreateRecurringTransactionResponse>> CreateAsync(CreateRecurringTransactionRequest request);
+        Task<ServiceResult> UpdateAsync(int id, UpdateRecurringTransactionRequest request);
         Task<ServiceResult> DeleteAsync(int id, string userId);
         Task<ServiceResult<List<RecurringTransactionDto>>> GetRecurringTransactionsByTypeAsync(TransactionType Type, string userId);
         Task<ServiceResult<List<RecurringTransactionDto>>> GetRecurringTransactionsByCategoryAsync(int categoryId, string userId);

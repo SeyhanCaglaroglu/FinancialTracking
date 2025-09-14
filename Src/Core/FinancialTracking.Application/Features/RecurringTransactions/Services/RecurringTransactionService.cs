@@ -21,10 +21,8 @@ namespace FinancialTracking.Application.Features.RecurringTransactions.Services
 {
     public class RecurringTransactionService(IRecurringTransactionRepository _recurringTransactionRepository, IUnitOfWork _unitOfWork, IMapper _mapper) : IRecurringTransactionService
     {
-        public async Task<ServiceResult<CreateRecurringTransactionResponse>> CreateAsync(CreateRecurringTransactionRequest request, string userId)
+        public async Task<ServiceResult<CreateRecurringTransactionResponse>> CreateAsync(CreateRecurringTransactionRequest request)
         {
-            
-
             var recurringTransaction = _mapper.Map<RecurringTransaction>(request);
 
             await _recurringTransactionRepository.AddAsync(recurringTransaction);
@@ -51,7 +49,7 @@ namespace FinancialTracking.Application.Features.RecurringTransactions.Services
 
             var RecurringTransactionAsDto = _mapper.Map<List<RecurringTransactionDto>>(recurringTransactions);
 
-            return ServiceResult<List<RecurringTransactionDto>>.Success(RecurringTransactionAsDto);
+            return ServiceResult<List<RecurringTransactionDto>>.Success(RecurringTransactionAsDto,HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<RecurringTransactionDto>> GetByIdAsync(int id, string userId)
@@ -65,7 +63,7 @@ namespace FinancialTracking.Application.Features.RecurringTransactions.Services
 
             var RecurringTransactionAsDto = _mapper.Map<RecurringTransactionDto>(recurringTransaction);
 
-            return ServiceResult<RecurringTransactionDto>.Success(RecurringTransactionAsDto);
+            return ServiceResult<RecurringTransactionDto>.Success(RecurringTransactionAsDto,HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<List<RecurringTransactionDto>>> GetRecurringTransactionsByCategoryAsync(int categoryId, string userId)
@@ -74,7 +72,7 @@ namespace FinancialTracking.Application.Features.RecurringTransactions.Services
 
             var RecurringTransactionAsDto = _mapper.Map<List<RecurringTransactionDto>>(recurringTransactions);
 
-            return ServiceResult<List<RecurringTransactionDto>>.Success(RecurringTransactionAsDto);
+            return ServiceResult<List<RecurringTransactionDto>>.Success(RecurringTransactionAsDto, HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<List<RecurringTransactionDto>>> GetRecurringTransactionsByTypeAsync(TransactionType Type, string userId)
@@ -83,14 +81,13 @@ namespace FinancialTracking.Application.Features.RecurringTransactions.Services
 
             var RecurringTransactionAsDto = _mapper.Map<List<RecurringTransactionDto>>(recurringTransactions);
 
-            return ServiceResult<List<RecurringTransactionDto>>.Success(RecurringTransactionAsDto);
+            return ServiceResult<List<RecurringTransactionDto>>.Success(RecurringTransactionAsDto, HttpStatusCode.OK);
         }
 
-        public async Task<ServiceResult> UpdateAsync(int id, UpdateRecurringTransactionRequest request, string userId)
+        public async Task<ServiceResult> UpdateAsync(int id, UpdateRecurringTransactionRequest request)
         {
             var recurringTransaction = _mapper.Map<RecurringTransaction>(request);
             recurringTransaction.Id = id;
-            recurringTransaction.UserId = userId;
 
             _recurringTransactionRepository.Update(recurringTransaction);
             await _unitOfWork.SaveChangesAsync();

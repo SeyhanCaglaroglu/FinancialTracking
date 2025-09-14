@@ -13,13 +13,6 @@ namespace FinancialTracking.API.Extensions
             // Clients konfigürasyonunu ekle
             services.Configure<List<Client>>(configuration.GetSection("Clients"));
 
-            // TokenOptions al
-            var tokenOptions = configuration.GetSection("TokenOptions").Get<CustomTokenOption>();
-
-            services.AddApplication(configuration)
-                    .AddPersistence(configuration)
-                    .AddAuthExt(tokenOptions!);
-
             return services;
         }
     }

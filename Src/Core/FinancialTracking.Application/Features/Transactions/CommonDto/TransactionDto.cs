@@ -10,5 +10,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Transactions.CommonDto
 {
-    public record TransactionDto(int Id,Money Amount, string Description, TransactionType Type, DateTime Created, DateTime Updated, string UserId, int CategoryId, CategoryDto Category);
+    public record TransactionDto(int Id,Money Amount, string Description, TransactionType Type, DateTime Created, DateTime Updated, int CategoryId, CategoryDto Category);
 }

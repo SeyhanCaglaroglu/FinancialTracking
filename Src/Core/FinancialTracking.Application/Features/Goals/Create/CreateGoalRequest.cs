@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Goals.Create
 {
-    public record CreateGoalRequest(string Title, Money TargetAmount, Money CurrentAmount, DateTime Deadline);
+    public record CreateGoalRequest(string Title, Money TargetAmount, Money CurrentAmount, DateTime Deadline,string userId);
 }

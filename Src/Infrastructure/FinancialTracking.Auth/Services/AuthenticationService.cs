@@ -46,7 +46,7 @@ namespace FinancialTracking.Auth.Services
 
             var token = _tokenService.CreateClientToken(client);
 
-            return ServiceResult<ClientTokenDto>.Success(token, HttpStatusCode.OK);
+            return ServiceResult<ClientTokenDto>.Success(token, HttpStatusCode.Created);
         }
 
         public async Task<ServiceResult<TokenDto>> CreateToken(LoginDto loginDto)
@@ -77,7 +77,7 @@ namespace FinancialTracking.Auth.Services
 
             await _unitOfWork.SaveChangesAsync();
 
-            return ServiceResult<TokenDto>.Success(token, HttpStatusCode.OK);
+            return ServiceResult<TokenDto>.Success(token, HttpStatusCode.Created);
         }
 
         public async Task<ServiceResult<TokenDto>> CreateTokenByRefreshToken(string refreshToken)
@@ -103,7 +103,7 @@ namespace FinancialTracking.Auth.Services
 
             await _unitOfWork.SaveChangesAsync();
 
-            return ServiceResult<TokenDto>.Success(tokenDto, HttpStatusCode.OK);
+            return ServiceResult<TokenDto>.Success(tokenDto, HttpStatusCode.Created);
         }
 
         public async Task<ServiceResult<NoDataDto>> RevokeRefreshToken(string refreshToken)
@@ -118,7 +118,7 @@ namespace FinancialTracking.Auth.Services
 
             await _unitOfWork.SaveChangesAsync();
 
-            return ServiceResult<NoDataDto>.Success(HttpStatusCode.OK);
+            return ServiceResult<NoDataDto>.Success(HttpStatusCode.NoContent);
         }
     }
 }

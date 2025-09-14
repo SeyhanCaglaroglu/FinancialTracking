@@ -20,9 +20,9 @@ namespace FinancialTracking.Application.Features.Goals.Services
 {
     public class GoalService(IGoalRepository _GoalRepository, IUnitOfWork _unitOfWork, IMapper _mapper) : IGoalService
     {
-        public async Task<ServiceResult<CreateGoalResponse>> CreateAsync(CreateGoalRequest request, string userId)
+        public async Task<ServiceResult<CreateGoalResponse>> CreateAsync(CreateGoalRequest request)
         {
-            var anyGoal = await _GoalRepository.AnyAsync(x => x.Title == request.Title, userId);
+            var anyGoal = await _GoalRepository.AnyAsync(x => x.Title == request.Title,request.userId);
 
             if (anyGoal)
             {
@@ -55,7 +55,7 @@ namespace FinancialTracking.Application.Features.Goals.Services
 
             var GoalAsDto = _mapper.Map<List<GoalDto>>(goals);
 
-            return ServiceResult<List<GoalDto>>.Success(GoalAsDto);
+            return ServiceResult<List<GoalDto>>.Success(GoalAsDto,HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<GoalDto>> GetByIdAsync(int id, string userId)
@@ -69,7 +69,7 @@ namespace FinancialTracking.Application.Features.Goals.Services
 
             var GoalAsDto = _mapper.Map<GoalDto>(goal);
 
-            return ServiceResult<GoalDto>.Success(GoalAsDto);
+            return ServiceResult<GoalDto>.Success(GoalAsDto, HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<GoalDto>> GetGoalByTitleAsync(string title, string userId)
@@ -83,14 +83,13 @@ namespace FinancialTracking.Application.Features.Goals.Services
 
             var GoalAsDto = _mapper.Map<GoalDto>(goal);
 
-            return ServiceResult<GoalDto>.Success(GoalAsDto);
+            return ServiceResult<GoalDto>.Success(GoalAsDto,HttpStatusCode.OK);
         }
 
-        public async Task<ServiceResult> UpdateAsync(int id, UpdateGoalRequest request, string userId)
+        public async Task<ServiceResult> UpdateAsync(int id, UpdateGoalRequest request)
         {
             var goal = _mapper.Map<Goal>(request);
             goal.Id = id;
-            goal.UserId = userId;
 
             _GoalRepository.Update(goal);
             await _unitOfWork.SaveChangesAsync();

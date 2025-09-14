@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace FinancialTracking.Domain.ValueObjects
 {
     public class Money
@@ -6,7 +8,7 @@ namespace FinancialTracking.Domain.ValueObjects
         public decimal Amount { get; set; }
         public string Currency { get; set; } = "TRY";
 
-        private Money() { }
+        public Money() { }
 
         public Money(decimal amount,string currency)
         {

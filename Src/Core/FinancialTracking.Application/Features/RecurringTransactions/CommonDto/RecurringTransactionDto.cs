@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.RecurringTransactions.CommonDto
 {
-    public record RecurringTransactionDto(Money Amount, string Description, TransactionType Type, DateTime NextExecutionDate, int DayRepeatInterval, int? CategoryId, DateTime Created, DateTime Updated);
+    public record RecurringTransactionDto(int Id,Money Amount, string Description, TransactionType Type, DateTime NextExecutionDate, int DayRepeatInterval, int? CategoryId, DateTime Created, DateTime Updated);
 }

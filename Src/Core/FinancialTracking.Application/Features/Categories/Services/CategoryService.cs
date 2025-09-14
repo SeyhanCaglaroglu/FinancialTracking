@@ -16,9 +16,9 @@ namespace FinancialTracking.Application.Features.Categories.Services
 {
     public class CategoryService(ICategoryRepository _categoryRepository,IUnitOfWork _unitOfWork,IMapper _mapper) : ICategoryService
     {
-        public async Task<ServiceResult<CreateCategoryResponse>> CreateAsync(CreateCategoryRequest request,string userId)
+        public async Task<ServiceResult<CreateCategoryResponse>> CreateAsync(CreateCategoryRequest request)
         {
-            var anyCategory = await _categoryRepository.AnyAsync(x => x.Name == request.Name, userId);
+            var anyCategory = await _categoryRepository.AnyAsync(x => x.Name == request.Name, request.userId);
 
             if(anyCategory)
             {
@@ -51,7 +51,7 @@ namespace FinancialTracking.Application.Features.Categories.Services
 
             var categoryAsDto = _mapper.Map<List<CategoryDto>>(categories);
 
-            return ServiceResult<List<CategoryDto>>.Success(categoryAsDto);
+            return ServiceResult<List<CategoryDto>>.Success(categoryAsDto,HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<CategoryDto>> GetByIdAsync(int id, string userId)
@@ -65,7 +65,7 @@ namespace FinancialTracking.Application.Features.Categories.Services
 
             var categoryAsDto = _mapper.Map<CategoryDto>(category);
 
-            return ServiceResult<CategoryDto>.Success(categoryAsDto);
+            return ServiceResult<CategoryDto>.Success(categoryAsDto, HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<CategoryDto>> GetCategoryByNameAsync(string name, string userId)
@@ -79,14 +79,13 @@ namespace FinancialTracking.Application.Features.Categories.Services
 
             var categoryAsDto = _mapper.Map<CategoryDto>(category);
 
-            return ServiceResult<CategoryDto>.Success(categoryAsDto);
+            return ServiceResult<CategoryDto>.Success(categoryAsDto, HttpStatusCode.OK);
         }
 
-        public async Task<ServiceResult> UpdateAsync(int id, UpdateCategoryRequest request, string userId)
+        public async Task<ServiceResult> UpdateAsync(int id, UpdateCategoryRequest request)
         {
             var category = _mapper.Map<Category>(request);
             category.Id = id;
-            category.UserId = userId;
 
             _categoryRepository.Update(category);
             await _unitOfWork.SaveChangesAsync();
