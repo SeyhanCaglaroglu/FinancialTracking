@@ -75,218 +75,65 @@ bulunmaktadır.
 FinancialTracking/
 │
 ├── FinancialTracking.API/
-│   ├── Controllers/
-│   │   ├── AuthController.cs
-│   │   ├── BudgetsController.cs
-│   │   ├── CategoriesController.cs
-│   │   ├── CustomBaseController.cs
-│   │   ├── GoalsController.cs
-│   │   ├── RecurringTransactionsController.cs
-│   │   ├── TransactionsController.cs
-│   │   └── UsersController.cs
-│   │
-│   ├── ExceptionHandlers/
-│   │   └── GlobalExceptionHandler.cs
-│   │
-│   ├── Extensions/
-│   │   ├── IdentityExtensions.cs
-│   │   ├── ControllerExtensions.cs
-│   │   ├── ExceptionHandlerExtensions.cs
-│   │   ├── ServiceExtensions.cs
-│   │   └── VersioningExtensions.cs
-│   │
-│   ├── Filters/
-│   │   └── FluentValidationFilter.cs
-│   │
+│   ├── Controllers/...
+│   ├── ExceptionHandlers/...
+│   ├── Extensions/...
+│   ├── Filters/...
 │   └── Program.cs
 │
 ├── Core/
 │   ├── FinancialTracking.Domain/
-│   │   ├── Entities/
-│   │   │   ├── Category.cs
-│   │   │   ├── Common/
-│   │   │   |    └── BaseEntity.cs
-│   │   │   |    ├── IAuditEntity.cs
-│   │   │   ├── Goal.cs
-│   │   │   ├── Budget.cs
-│   │   │   ├── Transaction.cs
-│   │   │   ├── RecurringTransaction.cs
-│   │   │   ├── User.cs
-│   │   │   └── UserRefreshToken.cs
-│   │   │
-│   │   ├── Enums/
-│   │   │   └── TransactionType.cs
-│   │   │
-│   │   ├── ValueObjects/
-│   │   │   └── Money.cs
-│   │   │
-│   │   └── Configuration/
-│   │       ├── ConnectionStringOption.cs
-│   │       └── Client.cs
+│   │   ├── Entities/...
+│   │   ├── Enums/...
+│   │   ├── ValueObjects/...
+│   │   └── Configuration/...
 │   │
 │   └── FinancialTracking.Application/
-│       ├── Contracts/
-│       │   ├── Caching/
-│       │   │   └── IRedisService.cs
-│       │   │
-│       │   ├── Auth/
-│       │   │   ├── IAuthenticationService.cs
-│       │   │   ├── ITokenService.cs
-│       │   │   └── IUserService.cs
-│       │   │
-│       │   └── Persistence/
-│       │       ├── IGenericRepository.cs
-│       │       └── IUnitOfWork.cs
-│       │
-│       ├── Extensions/
-│       │   └── ServiceExtensions.cs
-│       │
-│       ├── Features/
-│       │   ├── Categories/
-│       │   │   ├── CategoryMappingProfile.cs
-│       │   │   ├── Create/
-│       │   │   │   ├── CreateCategoryRequest.cs
-│       │   │   │   ├── CreateCategoryRequestValidator.cs
-│       │   │   │   └── CreateCategoryResponse.cs
-│       │   │   ├── CommonDto/
-│       │   │   │   └── CategoryDto.cs
-│       │   │   ├── ICategoryRepository.cs
-│       │   │   ├── Services/
-│       │   │   │   ├── CategoryService.cs
-│       │   │   │   └── ICategoryService.cs
-│       │   │   └── Update/
-│       │   │       ├── UpdateCategoryRequest.cs
-│       │   │       └── UpdateCategoryRequestValidator.cs
-│       │   │
-│       │   ├── Budgets/
-│       │   │   ├── BudgetMappingProfile.cs
-│       │   │   ├── Create/
-│       │   │   │   ├── CreateBudgetRequest.cs
-│       │   │   │   ├── CreateBudgetRequestValidator.cs
-│       │   │   │   └── CreateBudgetResponse.cs
-│       │   │   ├── CommonDto/
-│       │   │   │   └── BudgetDto.cs
-│       │   │   ├── IBudgetRepository.cs
-│       │   │   ├── Services/
-│       │   │   │   ├── BudgetService.cs
-│       │   │   │   └── IBudgetService.cs
-│       │   │   └── Update/
-│       │   │       ├── UpdateBudgetRequest.cs
-│       │   │       └── UpdateBudgetRequestValidator.cs
-│       │   │
-│       │   ├── Goals/
-│       │   │   ├── GoalMappingProfile.cs
-│       │   │   ├── Create/
-│       │   │   │   ├── CreateGoalRequest.cs
-│       │   │   │   ├── CreateGoalRequestValidator.cs
-│       │   │   │   └── CreateGoalResponse.cs
-│       │   │   ├── CommonDto/
-│       │   │   │   └── GoalDto.cs
-│       │   │   ├── IGoalRepository.cs
-│       │   │   ├── Services/
-│       │   │   │   ├── GoalService.cs
-│       │   │   │   └── IGoalService.cs
-│       │   │   └── Update/
-│       │   │       ├── UpdateGoalRequest.cs
-│       │   │       └── UpdateGoalRequestValidator.cs
-│       │   │
-│       │   ├── Transactions/
-│       │   │   ├── TransactionMappingProfile.cs
-│       │   │   ├── Create/
-│       │   │   │   ├── CreateTransactionRequest.cs
-│       │   │   │   ├── CreateTransactionRequestValidator.cs
-│       │   │   │   └── CreateTransactionResponse.cs
-│       │   │   ├── CommonDto/
-│       │   │   │   └── TransactionDto.cs
-│       │   │   ├── ITransactionRepository.cs
-│       │   │   ├── Services/
-│       │   │   │   ├── TransactionService.cs
-│       │   │   │   └── ITransactionService.cs
-│       │   │   └── Update/
-│       │   │       ├── UpdateTransactionRequest.cs
-│       │   │       └── UpdateTransactionRequestValidator.cs
-│       │   │
-│       │   ├── RecurringTransactions/
-│       │   │   ├── RecurringTransactionMappingProfile.cs
-│       │   │   ├── Create/
-│       │   │   │   ├── CreateRecurringTransactionRequest.cs
-│       │   │   │   ├── CreateRecurringTransactionRequestValidator.cs
-│       │   │   │   └── CreateRecurringTransactionResponse.cs
-│       │   │   ├── CommonDto/
-│       │   │   │   └── RecurringTransactionDto.cs
-│       │   │   ├── IRecurringTransactionRepository.cs
-│       │   │   ├── Services/
-│       │   │   │   ├── RecurringTransactionService.cs
-│       │   │   │   └── IRecurringTransactionService.cs
-│       │   │   └── Update/
-│       │   │       ├── UpdateRecurringTransactionRequest.cs
-│       │   │       └── UpdateRecurringTransactionRequestValidator.cs
-│       │   │
-│       │   └── Users/
-│       │       ├── Client/
-│       │       │   ├── ClientLoginDto.cs
-│       │       │   └── ClientTokenDto.cs
-│       │       ├── Dtos/
-│       │       │   ├── CreateUserDto.cs
-│       │       │   ├── CreateUserRoleDto.cs
-│       │       │   ├── LoginDto.cs
-│       │       │   ├── NoDataDto.cs
-│       │       │   ├── TokenDto.cs
-│       │       │   └── UserDto.cs
-│       │       └── UserMappingProfile.cs
-│       │       | 
-│               RefreshTokens/
-│               ├── IRefreshTokenRepository.cs
-│               └── RefreshTokenDto.cs
-│       │
+│       ├── Contracts/...
+│       │   ├── Caching/...
+│       │   ├── Auth/...
+│       │   └── Persistence/...
+│       ├── Extensions/...
+│       ├── Features/...
+│       │   ├── Categories/...
+│       │   ├── Budgets/...
+│       │   ├── Goals/...
+│       │   ├── Transactions/...
+│       │   ├── RecurringTransactions/...
+│       │   ├── Users/...
+│       │   │   ├── Client/...
+│       │   │   └── Dtos/...
+│       │   └── RefreshTokens/...
 │       └── ServiceResult.cs
 │
 └── Infrastructure/
     ├── FinancialTracking.Persistence/
-    │   ├── Context/
-    │   │   └── FTDbContext.cs
-    │   ├── Extensions/
-    │   │   └── PersistenceExtensions.cs
-    │   ├── Features/
-    │   │   ├── Categories/
-    │   │   │   ├── CategoryConfiguration.cs
-    │   │   │   └── CategoryRepository.cs
-    │   │   ├── Budgets/
-    │   │   │   ├── BudgetConfiguration.cs
-    │   │   │   └── BudgetRepository.cs
-    │   │   ├── Goals/
-    │   │   │   ├── GoalConfiguration.cs
-    │   │   │   └── GoalRepository.cs
-    │   │   ├── Transactions/
-    │   │   │   ├── TransactionConfiguration.cs
-    │   │   │   └── TransactionRepository.cs
-    │   │   ├── RecurringTransactions/
-    │   │   │   ├── RecurringTransactionConfiguration.cs
-    │   │   │   └── RecurringTransactionRepository.cs
-    │   │   └── RefreshTokens/
-    │   │       ├── UserRefreshTokenConfiguration.cs
-    │   │       ├── RefreshTokenRepository.cs
-    |   |
+    │   ├── Context/...
+    │   ├── Extensions/...
+    │   ├── Features/...
+    │   │   ├── Categories/...
+    │   │   ├── Budgets/...
+    │   │   ├── Goals/...
+    │   │   ├── Transactions/...
+    │   │   ├── RecurringTransactions/...
+    │   │   └── RefreshTokens/...
+    │   ├── Interceptors/...
+    │   ├── Migrations/...
     │   ├── GenericRepository.cs
-    │   ├── Interceptors/
-    │   │   └── AuditDbContextInterceptor.cs
-    │   ├── Migrations/
     │   ├── PersistenceAssembly.cs
     │   └── UnitOfWork.cs
     │
     ├── FinancialTracking.Auth/
-    │   ├── SignInService.cs
-    │   ├── Extensions/
-    │   │   └── AuthExtensions.cs
-    │   ├── Options/
-    │   │   └── CustomTokenOptions.cs
-    │   └── Services/
+    │   ├── Extensions/...
+    │   ├── Options/...
+    │   └── Services/...
+    │       ├── SignInService.cs
     │       ├── AuthenticationService.cs
     │       ├── TokenService.cs
     │       └── UserService.cs
     │
-    └── FinancialTracking.Caching/
-        └── RedisService.cs
+    └── FinancialTracking.Caching/...
+```
 
 
 
