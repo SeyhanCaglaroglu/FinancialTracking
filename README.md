@@ -74,7 +74,7 @@ bulunmaktadır.
 ```text
 FinancialTracking/
 │
-├── App.API/
+├── FinancialTracking.API/
 │   ├── Controllers/
 │   │   ├── AuthController.cs
 │   │   ├── BudgetsController.cs
@@ -101,7 +101,7 @@ FinancialTracking/
 │   └── Program.cs
 │
 ├── Core/
-│   ├── App.Domain/
+│   ├── FinancialTracking.Domain/
 │   │   ├── Entities/
 │   │   │   ├── Category.cs
 │   │   │   ├── Common/
@@ -124,7 +124,7 @@ FinancialTracking/
 │   │       ├── ConnectionStringOption.cs
 │   │       └── Client.cs
 │   │
-│   └── App.Application/
+│   └── FinancialTracking.Application/
 │       ├── Contracts/
 │       │   ├── Caching/
 │       │   │   └── IRedisService.cs
@@ -242,7 +242,7 @@ FinancialTracking/
 │       └── ServiceResult.cs
 │
 └── Infrastructure/
-    ├── App.Persistence/
+    ├── FinancialTracking.Persistence/
     │   ├── Context/
     │   │   └── FTDbContext.cs
     │   ├── Extensions/
@@ -274,7 +274,7 @@ FinancialTracking/
     │   ├── PersistenceAssembly.cs
     │   └── UnitOfWork.cs
     │
-    ├── App.Auth/
+    ├── FinancialTracking.Auth/
     │   ├── SignInService.cs
     │   ├── Extensions/
     │   │   └── AuthExtensions.cs
@@ -285,7 +285,7 @@ FinancialTracking/
     │       ├── TokenService.cs
     │       └── UserService.cs
     │
-    └── App.Caching/
+    └── FinancialTracking.Caching/
         └── RedisService.cs
 
 
