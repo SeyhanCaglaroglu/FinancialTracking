@@ -12,7 +12,6 @@ namespace FinancialTracking.API.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Tags("Users")]
-    [Authorize]
     public class UsersController(IUserService _userService) : CustomBaseController
     {
         [AllowAnonymous]
@@ -33,6 +32,7 @@ namespace FinancialTracking.API.Controllers
         [ProducesResponseType(typeof(ServiceResult<NoDataDto>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ServiceResult<NoDataDto>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ServiceResult<NoDataDto>), StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<IActionResult> CreateUserRole(CreateUserRoleDto createUserRoleDto) => CreateActionResult(await _userService.CreateUserRoleAsync(createUserRoleDto));
 
         [MapToApiVersion("1")]
@@ -43,6 +43,7 @@ namespace FinancialTracking.API.Controllers
         [ProducesResponseType(typeof(ServiceResult<UserDto>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ServiceResult<UserDto>), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ServiceResult<UserDto>), StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<IActionResult> GetUserByUserName(string userName) => CreateActionResult(await _userService.GetUserByUserNameAsync(userName));
 
     }

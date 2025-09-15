@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace FinancialTracking.Domain.Entities
@@ -18,6 +19,7 @@ namespace FinancialTracking.Domain.Entities
         public int DayRepeatInterval { get; set; }
 
         public int? CategoryId { get; set; }
+        [JsonIgnore]
         public Category? Category { get; set; }
 
         public DateTime Created { get; set; }

@@ -20,6 +20,7 @@ namespace FinancialTracking.Application.Features.Transactions
             CreateMap<CreateTransactionRequest, Transaction>().ReverseMap();
 
             CreateMap<UpdateTransactionRequest, Transaction>().ReverseMap();
+            CreateMap<TransactionInCategoryDto, Transaction>().ReverseMap();
         }
     }
 }

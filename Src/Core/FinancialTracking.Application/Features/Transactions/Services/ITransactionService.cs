@@ -19,5 +19,7 @@ namespace FinancialTracking.Application.Features.Transactions.Services
         Task<ServiceResult> DeleteAsync(int id,string userId);
         Task<ServiceResult<List<TransactionDto>>> GetTransactionsByTypeAsync(TransactionType transactionType, string userId);
         Task<ServiceResult<List<TransactionDto>>> GetTransactionsByCategoryAsync(int categoryId, string userId);
+        Task<ServiceResult<List<TransactionInCategoryDto>>> GetTransactionsInCategoryByType(TransactionType transactionType, string userId);
+        Task<ServiceResult<List<TransactionInCategoryDto>>> GetTransactionsInCategoryByCategoryId(int categoryId, string userId);
     }
 }

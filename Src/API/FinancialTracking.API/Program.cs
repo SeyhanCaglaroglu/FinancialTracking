@@ -1,7 +1,9 @@
 using FinancialTracking.API.Extensions;
+using FinancialTracking.Application.Contracts.Caching;
 using FinancialTracking.Application.Extensions;
 using FinancialTracking.Auth.Extensions;
 using FinancialTracking.Auth.Options;
+using FinancialTracking.Caching;
 using FinancialTracking.Persistence.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +11,9 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithValidation().AddAppServices(builder.Configuration).AddCustomIdentity().AddVersioningExt();
+builder.Services.AddControllersWithValidation().AddAppServices(builder.Configuration).AddCustomIdentity().AddVersioningExt().AddExceptionHandlerExt();
+
+builder.Services.AddSingleton<IRedisService, RedisService>();
 
 // TokenOptions al
 builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
@@ -30,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 app.UseRouting();

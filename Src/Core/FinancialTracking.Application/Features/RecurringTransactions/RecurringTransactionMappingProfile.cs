@@ -18,6 +18,7 @@ namespace FinancialTracking.Application.Features.RecurringTransactions
             CreateMap<RecurringTransaction, RecurringTransactionDto>().ReverseMap();
             CreateMap<RecurringTransaction, CreateRecurringTransactionRequest>().ReverseMap();
             CreateMap<RecurringTransaction, UpdateRecurringTransactionRequest>().ReverseMap();
+            CreateMap<RecurringTransaction, RecurringTransactionInCategoryDto>().ReverseMap();
         }
     }
 }

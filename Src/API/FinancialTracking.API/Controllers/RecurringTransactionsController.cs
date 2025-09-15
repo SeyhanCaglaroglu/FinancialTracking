@@ -15,6 +15,7 @@ namespace FinancialTracking.API.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Tags("RecurringTransactions")]
+    [Authorize]
     public class RecurringTransactionsController(IRecurringTransactionService _recurringTransactionService) : CustomBaseController
     {
         [MapToApiVersion("1")]
@@ -48,6 +49,16 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> GetRecurringTransactionsByType(TransactionType transactionType,string userId) => CreateActionResult(await _recurringTransactionService.GetRecurringTransactionsByTypeAsync(transactionType, userId));
 
         [MapToApiVersion("1")]
+        [HttpGet("GetRecurringTransactionsInCategoryByType/{transactionType}/{userId}", Name = "GetRecurringTransactionsInCategoryByType")]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetRecurringTransactionsInCategoryByType(TransactionType transactionType, string userId) => CreateActionResult(await _recurringTransactionService.GetRecurringTransactionsInCategoryByTypeAsync(transactionType, userId));
+
+        [MapToApiVersion("1")]
         [HttpGet("GetRecurringTransactionsByCategory/{categoryId}/{userId}", Name = "GetRecurringTransactionsByCategory")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionDto>>), StatusCodes.Status200OK)]
@@ -55,6 +66,15 @@ namespace FinancialTracking.API.Controllers
         [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionDto>>), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionDto>>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetRecurringTransactionsByCategory(int categoryId, string userId) => CreateActionResult(await _recurringTransactionService.GetRecurringTransactionsByCategoryAsync(categoryId, userId));
+
+        [MapToApiVersion("1")]
+        [HttpGet("GetRecurringTransactionsInCategoryByCategory/{categoryId}/{userId}", Name = "GetRecurringTransactionsInCategoryByCategory")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ServiceResult<List<RecurringTransactionInCategoryDto>>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetRecurringTransactionsInCategoryByCategory(int categoryId, string userId) => CreateActionResult(await _recurringTransactionService.GetRecurringTransactionsInCategoryByCategoryAsync(categoryId, userId));
 
         [MapToApiVersion("1")]
         [HttpPost("CreateRecurringTransaction",Name = "CreateRecurringTransaction")]

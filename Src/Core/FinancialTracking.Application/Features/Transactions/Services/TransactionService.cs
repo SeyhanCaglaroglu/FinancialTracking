@@ -81,6 +81,24 @@ namespace FinancialTracking.Application.Features.Transactions.Services
             return ServiceResult<List<TransactionDto>>.Success(transactionAsDto, HttpStatusCode.OK);
         }
 
+        public async Task<ServiceResult<List<TransactionInCategoryDto>>> GetTransactionsInCategoryByCategoryId(int categoryId, string userId)
+        {
+            var transactions = await _transactionRepository.GetTransactionsInCategoryByCategoryId(categoryId, userId);
+
+            var transactionAsDto = _mapper.Map<List<TransactionInCategoryDto>>(transactions);
+
+            return ServiceResult<List<TransactionInCategoryDto>>.Success(transactionAsDto, HttpStatusCode.OK);
+        }
+
+        public async Task<ServiceResult<List<TransactionInCategoryDto>>> GetTransactionsInCategoryByType(TransactionType transactionType, string userId)
+        {
+            var transactions = await _transactionRepository.GetTransactionsInCategoryByType(transactionType, userId);
+
+            var transactionAsDto = _mapper.Map<List<TransactionInCategoryDto>>(transactions);
+
+            return ServiceResult<List<TransactionInCategoryDto>>.Success(transactionAsDto, HttpStatusCode.OK);
+        }
+
         public async Task<ServiceResult> UpdateAsync(int id, UpdateTransactionRequest request)
         {
             var transaction = _mapper.Map<Transaction>(request);

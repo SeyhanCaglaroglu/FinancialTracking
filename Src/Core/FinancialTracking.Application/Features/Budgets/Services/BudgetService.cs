@@ -15,11 +15,13 @@ using System.Threading.Tasks;
 using FinancialTracking.Application.Features.Budgets.Update;
 using FinancialTracking.Application.Features.Budgets.CommonDto;
 using FinancialTracking.Application.Features.Budgets.Create;
+using FinancialTracking.Application.Contracts.Caching;
 
 namespace FinancialTracking.Application.Features.Budgets.Services
 {
-    public class BudgetService(IBudgetRepository _BudgetRepository, IUnitOfWork _unitOfWork, IMapper _mapper) : IBudgetService
+    public class BudgetService(IBudgetRepository _BudgetRepository, IUnitOfWork _unitOfWork, IMapper _mapper,IRedisService _redisService) : IBudgetService
     {
+        private const string BudgetListCacheKey = "BudgetListCacheKey";
         public async Task<ServiceResult<CreateBudgetResponse>> CreateAsync(CreateBudgetRequest request)
         {
             var budget = _mapper.Map<Budget>(request);
@@ -44,9 +46,18 @@ namespace FinancialTracking.Application.Features.Budgets.Services
 
         public async Task<ServiceResult<List<BudgetDto>>> GetAllListAsync(string userId)
         {
+            //Get redis
+            var budgetListAsCached = await _redisService.GetAsync<List<BudgetDto>>(BudgetListCacheKey);
+
+            if (budgetListAsCached is not null) return ServiceResult<List<BudgetDto>>.Success(budgetListAsCached);
+
+            //get db
             var budgets = await _BudgetRepository.GetAllAsync(userId);
 
             var BudgetAsDto = _mapper.Map<List<BudgetDto>>(budgets);
+
+            //add redis
+            await _redisService.SetAsync(BudgetListCacheKey, BudgetAsDto, TimeSpan.FromMinutes(1));
 
             return ServiceResult<List<BudgetDto>>.Success(BudgetAsDto,HttpStatusCode.OK);
         }

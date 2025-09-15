@@ -18,8 +18,7 @@ namespace FinancialTracking.API.Controllers
     public class BudgetsController(IBudgetService _budgetService) : CustomBaseController
     {
         [MapToApiVersion("1")]
-        [HttpGet("GetAllBudgets", Name = "GetAllBudgets")]
-        [Consumes("application/json")]
+        [HttpGet("GetAllBudgets/{userId}", Name = "GetAllBudgets")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<List<BudgetDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<List<BudgetDto>>), StatusCodes.Status401Unauthorized)]
@@ -28,8 +27,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> GetAllBudgets(string userId) => CreateActionResult(await _budgetService.GetAllListAsync(userId));
 
         [MapToApiVersion("1")]
-        [HttpGet("GetBudgetById/{id}", Name = "GetBudgetById")]
-        [Consumes("application/json")]
+        [HttpGet("GetBudgetById/{id}/{userId}", Name = "GetBudgetById")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<BudgetDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<BudgetDto>), StatusCodes.Status401Unauthorized)]
@@ -61,8 +59,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> UpdateBudget(int id, UpdateBudgetRequest request) => CreateActionResult(await _budgetService.UpdateAsync(id, request));
 
         [MapToApiVersion("1")]
-        [HttpDelete("DeleteBudget/{id}", Name = "DeleteBudget")]
-        [Consumes("application/json")]
+        [HttpDelete("DeleteBudget/{id}/{userId}", Name = "DeleteBudget")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status400BadRequest)]

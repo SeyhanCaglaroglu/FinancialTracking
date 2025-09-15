@@ -18,8 +18,7 @@ namespace FinancialTracking.API.Controllers
     public class CategoriesController(ICategoryService _categoryService) : CustomBaseController
     {
         [MapToApiVersion("1")]
-        [HttpGet("GetAllCategories", Name = "GetAllCategories")]
-        [Consumes("application/json")]
+        [HttpGet("GetAllCategories/{userId}", Name = "GetAllCategories")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<List<CategoryDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<List<CategoryDto>>), StatusCodes.Status401Unauthorized)]
@@ -28,8 +27,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> GetAllCategories(string userId) => CreateActionResult(await _categoryService.GetAllListAsync(userId));
 
         [MapToApiVersion("1")]
-        [HttpGet("GetCategoryById/{id}", Name = "GetCategoryById")]
-        [Consumes("application/json")]
+        [HttpGet("GetCategoryById/{id}/{userId}", Name = "GetCategoryById")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<CategoryDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<CategoryDto>), StatusCodes.Status401Unauthorized)]
@@ -39,8 +37,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> GetCategoryById(int id, string userId) => CreateActionResult(await _categoryService.GetByIdAsync(id, userId));
 
         [MapToApiVersion("1")]
-        [HttpGet("GetCategoryByName/{name}", Name = "GetCategoryByName")]
-        [Consumes("application/json")]
+        [HttpGet("GetCategoryByName/{name}/{userId}", Name = "GetCategoryByName")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<CategoryDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<CategoryDto>), StatusCodes.Status401Unauthorized)]
@@ -72,8 +69,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> UpdateCategory(int id, UpdateCategoryRequest request) => CreateActionResult(await _categoryService.UpdateAsync(id, request));
 
         [MapToApiVersion("1")]
-        [HttpDelete("DeleteCategory/{id}", Name = "DeleteCategory")]
-        [Consumes("application/json")]
+        [HttpDelete("DeleteCategory/{id}/{userId}", Name = "DeleteCategory")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status400BadRequest)]

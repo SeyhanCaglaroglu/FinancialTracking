@@ -13,7 +13,7 @@ namespace FinancialTracking.Application.Features.RecurringTransactions
     {
         Task<List<RecurringTransaction>> GetRecurringTransactionsByTypeAsync(TransactionType Type, string userId);
         Task<List<RecurringTransaction>> GetRecurringTransactionsInCategoryByTypeAsync(TransactionType Type, string userId);
-        Task<RecurringTransaction> GetRecurringTransactionsByCategoryAsync(int categoryId, string userId);
-        Task<RecurringTransaction> GetRecurringTransactionsInCategoryByCategoryAsync(int categoryId, string userId);
+        Task<List<RecurringTransaction>> GetRecurringTransactionsByCategoryAsync(int categoryId, string userId);
+        Task<List<RecurringTransaction>> GetRecurringTransactionsInCategoryByCategoryAsync(int categoryId, string userId);
     }
 }

@@ -18,8 +18,7 @@ namespace FinancialTracking.API.Controllers
     public class GoalsController(IGoalService _goalService) : CustomBaseController
     {
         [MapToApiVersion("1")]
-        [HttpGet("GetAllGoals",Name = "GetAllGoals")]
-        [Consumes("application/json")]
+        [HttpGet("GetAllGoals/{userId}",Name = "GetAllGoals")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<List<GoalDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<List<GoalDto>>), StatusCodes.Status401Unauthorized)]
@@ -28,8 +27,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> GetAllGoals(string userId) => CreateActionResult(await _goalService.GetAllListAsync(userId));
 
         [MapToApiVersion("1")]
-        [HttpGet("GetGoalById/{id}", Name = "GetGoalById")]
-        [Consumes("application/json")]
+        [HttpGet("GetGoalById/{id}/{userId}", Name = "GetGoalById")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<GoalDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<GoalDto>), StatusCodes.Status401Unauthorized)]
@@ -39,7 +37,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> GetGoalById(int id,string userId) => CreateActionResult(await _goalService.GetByIdAsync(id, userId));
 
         [MapToApiVersion("1")]
-        [HttpGet("GetGoalByTitle/{title}", Name = "GetGoalByTitle")]
+        [HttpGet("GetGoalByTitle/{title}/{userId}", Name = "GetGoalByTitle")]
         [Consumes("application/json")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<GoalDto>), StatusCodes.Status200OK)]
@@ -72,8 +70,7 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> UpdateGoal(int id, UpdateGoalRequest request) => CreateActionResult(await _goalService.UpdateAsync(id, request));
 
         [MapToApiVersion("1")]
-        [HttpDelete("DeleteGoal/{id}", Name = "DeleteGoal")]
-        [Consumes("application/json")]
+        [HttpDelete("DeleteGoal/{id}/{userId}", Name = "DeleteGoal")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status400BadRequest)]
@@ -81,5 +78,8 @@ namespace FinancialTracking.API.Controllers
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ServiceResult), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> DeleteGoal(int id, string userId) => CreateActionResult(await _goalService.DeleteAsync(id, userId));
+
+        
+
     }
 }

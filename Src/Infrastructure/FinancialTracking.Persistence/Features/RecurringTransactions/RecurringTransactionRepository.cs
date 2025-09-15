@@ -13,13 +13,13 @@ namespace FinancialTracking.Persistence.Features.RecurringTransactions
 {
     public class RecurringTransactionRepository(FTDbContext context) : GenericRepository<RecurringTransaction, int>(context), IRecurringTransactionRepository
     {
-        public Task<RecurringTransaction> GetRecurringTransactionsByCategoryAsync(int categoryId, string userId) => Context.RecurringTransactions.FirstOrDefaultAsync(x=>x.CategoryId == categoryId && x.UserId == userId);
+        public Task<List<RecurringTransaction>> GetRecurringTransactionsByCategoryAsync(int categoryId, string userId) => Context.RecurringTransactions.Where(x=>x.CategoryId == categoryId && x.UserId == userId).ToListAsync();
 
-        public Task<RecurringTransaction> GetRecurringTransactionsInCategoryByCategoryAsync(int categoryId, string userId) => Context.RecurringTransactions.Include(x=>x.Category).FirstOrDefaultAsync(x => x.CategoryId == categoryId && x.UserId == userId);
+        public Task<List<RecurringTransaction>> GetRecurringTransactionsInCategoryByCategoryAsync(int categoryId, string userId) => Context.RecurringTransactions.Include(x=>x.Category).Where(x => x.CategoryId == categoryId && x.UserId == userId).ToListAsync();
 
         public Task<List<RecurringTransaction>> GetRecurringTransactionsInCategoryByTypeAsync(TransactionType Type, string userId) => Context.RecurringTransactions.Include(x=>x.Category).Where(x=>x.Type == Type && x.UserId == userId).ToListAsync();
 
-        Task<List<RecurringTransaction>> IRecurringTransactionRepository.GetRecurringTransactionsByTypeAsync(TransactionType Type, string userId)
+        public Task<List<RecurringTransaction>> GetRecurringTransactionsByTypeAsync(TransactionType Type, string userId)
         => Context.RecurringTransactions.Where(x => x.Type == Type && x.UserId == userId).ToListAsync();
     }
 }

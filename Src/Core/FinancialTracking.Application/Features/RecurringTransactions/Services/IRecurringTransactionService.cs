@@ -4,6 +4,7 @@ using FinancialTracking.Application.Features.Categories.Update;
 using FinancialTracking.Application.Features.RecurringTransactions.CommonDto;
 using FinancialTracking.Application.Features.RecurringTransactions.Create;
 using FinancialTracking.Application.Features.RecurringTransactions.Update;
+using FinancialTracking.Domain.Entities;
 using FinancialTracking.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,8 @@ namespace FinancialTracking.Application.Features.RecurringTransactions.Services
         Task<ServiceResult> DeleteAsync(int id, string userId);
         Task<ServiceResult<List<RecurringTransactionDto>>> GetRecurringTransactionsByTypeAsync(TransactionType Type, string userId);
         Task<ServiceResult<List<RecurringTransactionDto>>> GetRecurringTransactionsByCategoryAsync(int categoryId, string userId);
+
+        Task<ServiceResult<List<RecurringTransactionInCategoryDto>>> GetRecurringTransactionsInCategoryByTypeAsync(TransactionType Type, string userId);
+        Task<ServiceResult<List<RecurringTransactionInCategoryDto>>> GetRecurringTransactionsInCategoryByCategoryAsync(int categoryId, string userId);
     }
 }

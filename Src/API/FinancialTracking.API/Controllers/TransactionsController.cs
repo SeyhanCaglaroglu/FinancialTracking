@@ -15,6 +15,7 @@ namespace FinancialTracking.API.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Tags("Transactions")]
+    [Authorize]
     public class TransactionsController(ITransactionService _transactionService) : CustomBaseController
     {
         [MapToApiVersion("1")]
@@ -28,7 +29,6 @@ namespace FinancialTracking.API.Controllers
 
         [MapToApiVersion("1")]
         [HttpGet("GetTransactionById/{id}/{userId}", Name = "GetTransactionById")]
-        [Consumes("application/json")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<TransactionDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<TransactionDto>), StatusCodes.Status401Unauthorized)]
@@ -39,7 +39,6 @@ namespace FinancialTracking.API.Controllers
 
         [MapToApiVersion("1")]
         [HttpGet("GetTransactionsByType/{transactionType}/{userId}", Name = "GetTransactionsByType")]
-        [Consumes("application/json")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<List<TransactionDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<List<TransactionDto>>), StatusCodes.Status401Unauthorized)]
@@ -48,14 +47,31 @@ namespace FinancialTracking.API.Controllers
         public async Task<IActionResult> GetTransactionsByType(TransactionType transactionType, string userId) => CreateActionResult(await _transactionService.GetTransactionsByTypeAsync(transactionType, userId));
 
         [MapToApiVersion("1")]
+        [HttpGet("GetTransactionsInCategoryByType/{transactionType}/{userId}", Name = "GetTransactionsInCategoryByType")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetTransactionsInCategoryByType(TransactionType transactionType, string userId) => CreateActionResult(await _transactionService.GetTransactionsInCategoryByType(transactionType, userId));
+
+        [MapToApiVersion("1")]
         [HttpGet("GetTransactionsByCategory/{categoryId}/{userId}", Name = "GetTransactionsByCategory")]
-        [Consumes("application/json")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(ServiceResult<List<TransactionDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ServiceResult<List<TransactionDto>>), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ServiceResult<List<TransactionDto>>), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ServiceResult<List<TransactionDto>>), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetTransactionsByCategory(int categoryId, string userId) => CreateActionResult(await _transactionService.GetTransactionsByCategoryAsync(categoryId, userId));
+
+        [MapToApiVersion("1")]
+        [HttpGet("GetTransactionsInCategoryByCategoryId/{categoryId}/{userId}", Name = "GetTransactionsInCategoryByCategoryId")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ServiceResult<List<TransactionInCategoryDto>>), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetTransactionsInCategoryByCategoryId(int categoryId, string userId) => CreateActionResult(await _transactionService.GetTransactionsInCategoryByCategoryId(categoryId, userId));
 
         [MapToApiVersion("1")]
         [HttpPost(Name = "CreateTransaction")]

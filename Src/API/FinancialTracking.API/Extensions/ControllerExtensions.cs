@@ -1,4 +1,5 @@
-﻿using FluentValidation.AspNetCore;
+﻿using FinancialTracking.API.Filters;
+using FluentValidation.AspNetCore;
 
 namespace FinancialTracking.API.Extensions
 {
@@ -6,13 +7,14 @@ namespace FinancialTracking.API.Extensions
     {
         public static IServiceCollection AddControllersWithValidation(this IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(opt =>
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<FluentValidationFilter>();
+                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            }).AddJsonOptions(opt =>
             {
                 opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-            }).AddFluentValidation(options =>
-            {
-                options.RegisterValidatorsFromAssemblyContaining<Program>();
-                options.DisableDataAnnotationsValidation = true;
+
             });
                     
 
