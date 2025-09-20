@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialTracking.Caching", "Src\Infrastructure\FinancialTracking.Caching\FinancialTracking.Caching.csproj", "{180E527B-984A-4999-AE4A-0A6E9DD3BF77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialTracking.Test", "Test\FinancialTracking.Test\FinancialTracking.Test.csproj", "{8412001F-57B1-4096-8A01-CA20BAA355D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{180E527B-984A-4999-AE4A-0A6E9DD3BF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{180E527B-984A-4999-AE4A-0A6E9DD3BF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{180E527B-984A-4999-AE4A-0A6E9DD3BF77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8412001F-57B1-4096-8A01-CA20BAA355D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8412001F-57B1-4096-8A01-CA20BAA355D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8412001F-57B1-4096-8A01-CA20BAA355D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8412001F-57B1-4096-8A01-CA20BAA355D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,5 +81,6 @@ Global
 		{77218B67-5BA6-42D0-8BD6-AC5B7EA12325} = {7F332070-9B7A-4569-AE09-66C051DA46BE}
 		{EEBFDF10-BD17-46E7-AF40-F6E0F88AB711} = {83DF7756-8140-405B-92D1-FC6D80EB4157}
 		{180E527B-984A-4999-AE4A-0A6E9DD3BF77} = {83DF7756-8140-405B-92D1-FC6D80EB4157}
+		{8412001F-57B1-4096-8A01-CA20BAA355D9} = {E0C3A977-1395-4F46-A286-F0B540B8052F}
 	EndGlobalSection
 EndGlobal

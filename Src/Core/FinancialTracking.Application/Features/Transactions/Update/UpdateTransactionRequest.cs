@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace FinancialTracking.Application.Features.Transactions.Update
 {
-    public record UpdateTransactionRequest(Money Amount, string Description, TransactionType Type, int? CategoryId, DateTime? Updated,string userId);
+    public record UpdateTransactionRequest(Money Amount, string Description, TransactionType Type, int? CategoryId,string userId);
 }

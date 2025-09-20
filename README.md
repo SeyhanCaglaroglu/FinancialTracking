@@ -69,6 +69,18 @@ bulunmaktadır.
 
 ---
 
+---
+
+### 📂 Test Katmanı
+
+- İki tür test bulunmaktadır:
+
+✅ Unit Test: Controller’lar ve iş mantığının küçük parçalarını test eder.
+
+🌐 Integration Test: Gerçek veritabanı veya sistem bileşenleri ile entegrasyonun doğru çalıştığını test eder.  
+
+---
+
 ## 📂 Dosya Yapısı
 
 ```text

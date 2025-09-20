@@ -15,7 +15,6 @@ namespace FinancialTracking.API.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Tags("Transactions")]
-    [Authorize]
     public class TransactionsController(ITransactionService _transactionService) : CustomBaseController
     {
         [MapToApiVersion("1")]
